@@ -1,2 +1,2 @@
 # note
-this is my stuty notes
+this is my study notes
