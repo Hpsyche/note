@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>4.生产者行为理论</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+:root { --side-bar-bg-color: #fafafa; --control-text-color: #777; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: normal; src: local("Open Sans Regular"), url("./github/400.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: normal; src: local("Open Sans Italic"), url("./github/400i.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: bold; src: local("Open Sans Bold"), url("./github/700.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: bold; src: local("Open Sans Bold Italic"), url("./github/700i.woff") format("woff"); }
+html { font-size: 16px; }
+body { font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color: rgb(51, 51, 51); line-height: 1.6; }
+#write { max-width: 860px; margin: 0px auto; padding: 30px 30px 100px; }
+#write > ul:first-child, #write > ol:first-child { margin-top: 30px; }
+a { color: rgb(65, 131, 196); }
+h1, h2, h3, h4, h5, h6 { position: relative; margin-top: 1rem; margin-bottom: 1rem; font-weight: bold; line-height: 1.4; cursor: text; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor { text-decoration: none; }
+h1 tt, h1 code { font-size: inherit; }
+h2 tt, h2 code { font-size: inherit; }
+h3 tt, h3 code { font-size: inherit; }
+h4 tt, h4 code { font-size: inherit; }
+h5 tt, h5 code { font-size: inherit; }
+h6 tt, h6 code { font-size: inherit; }
+h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+h3 { font-size: 1.5em; line-height: 1.43; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 1em; color: rgb(119, 119, 119); }
+p, blockquote, ul, ol, dl, table { margin: 0.8em 0px; }
+li > ol, li > ul { margin: 0px; }
+hr { height: 2px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border: 0px none; overflow: hidden; box-sizing: content-box; }
+li p.first { display: inline-block; }
+ul, ol { padding-left: 30px; }
+ul:first-child, ol:first-child { margin-top: 0px; }
+ul:last-child, ol:last-child { margin-bottom: 0px; }
+blockquote { border-left: 4px solid rgb(223, 226, 229); padding: 0px 15px; color: rgb(119, 119, 119); }
+blockquote blockquote { padding-right: 0px; }
+table { padding: 0px; word-break: initial; }
+table tr { border-top: 1px solid rgb(223, 226, 229); margin: 0px; padding: 0px; }
+table tr:nth-child(2n), thead { background-color: rgb(248, 248, 248); }
+table tr th { font-weight: bold; border-width: 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-left-style: solid; border-top-color: rgb(223, 226, 229); border-right-color: rgb(223, 226, 229); border-left-color: rgb(223, 226, 229); border-image: initial; border-bottom-style: initial; border-bottom-color: initial; text-align: left; margin: 0px; padding: 6px 13px; }
+table tr td { border: 1px solid rgb(223, 226, 229); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr th:first-child, table tr td:first-child { margin-top: 0px; }
+table tr th:last-child, table tr td:last-child { margin-bottom: 0px; }
+.CodeMirror-lines { padding-left: 4px; }
+.code-tooltip { box-shadow: rgba(0, 28, 36, 0.3) 0px 1px 1px 0px; border-top: 1px solid rgb(238, 242, 242); }
+.md-fences, code, tt { border: 1px solid rgb(231, 234, 237); background-color: rgb(248, 248, 248); border-radius: 3px; padding: 2px 4px 0px; font-size: 0.9em; }
+code { background-color: rgb(243, 244, 244); padding: 0px 4px 2px; }
+.md-fences { margin-bottom: 15px; margin-top: 15px; padding: 8px 1em 6px; }
+.md-task-list-item > input { margin-left: -1.3em; }
+@media print {
+  html { font-size: 13px; }
+  table, pre { break-inside: avoid; }
+  pre { word-wrap: break-word; }
+}
+.md-fences { background-color: rgb(248, 248, 248); }
+#write pre.md-meta-block { padding: 1rem; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border: 0px; border-radius: 3px; color: rgb(119, 119, 119); margin-top: 0px !important; }
+.mathjax-block > .code-tooltip { bottom: 0.375rem; }
+.md-mathjax-midline { background: rgb(250, 250, 250); }
+#write > h3.md-focus::before { left: -1.5625rem; top: 0.375rem; }
+#write > h4.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h5.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h6.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+.md-image > .md-meta { border-radius: 3px; padding: 2px 0px 0px 4px; font-size: 0.9em; color: inherit; }
+.md-tag { color: rgb(167, 167, 167); opacity: 1; }
+.md-toc { margin-top: 20px; padding-bottom: 20px; }
+.sidebar-tabs { border-bottom: none; }
+#typora-quick-open { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); }
+#typora-quick-open-item { background-color: rgb(250, 250, 250); border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238); border-style: solid; border-width: 1px; }
+.on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.12); }
+header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", Arial, sans-serif; }
+.file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state { visibility: visible; }
+.mac-seamless-mode #typora-sidebar { background-color: var(--side-bar-bg-color); }
+.md-lang { color: rgb(180, 101, 77); }
+.html-for-mac .context-menu { --item-hover-bg-color: #E6F0FE; }
+#md-notification .btn { border: 0px; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); }
+
+
+
+
+
+ .typora-export p, .typora-export .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><h1><a name='header-n0' class='md-header-anchor '></a>生产与生产函数概述</h1><h2><a name='header-n2' class='md-header-anchor '></a>生产与生产要素</h2><p>生产要素一般被划分为 劳动、土地、资本和企业家才能 四种类型</p><h2><a name='header-n4' class='md-header-anchor '></a>两种类型的生产要素</h2><h3><a name='header-n5' class='md-header-anchor '></a>里昂惕夫生产函数</h3><p>Q = Min（L/U，K/V）</p><p>实质：资本与劳动不能替换</p><h3><a name='header-n8' class='md-header-anchor '></a>柯布-道格拉斯生产函数</h3><p>Q = ALαKβ</p><p>实质：资本和劳动可以替换</p><h2><a name='header-n11' class='md-header-anchor '></a>短期和长期</h2><p>在具体分析生产者行为时，生产理论可以分为短期生产理论和长期生产理论。</p><p>这里所谓的短期和长期，并不是指一个具体的时间跨度，而是值厂商是否能够变动全部要素投入的数量。短期是指厂商来不及调整全部生产要素的数量，至少有一种生产要素的数量是固定不变的时间周期。长期是指厂商可以调整全部生产要素的数量的时间周期。</p><p>&nbsp;</p><h1><a name='header-n15' class='md-header-anchor '></a>短期生产函数</h1><p>TP：总产量</p><p>AP：平均产量（AP=TP/L)</p><p>MP：边际产量（MP=△TP/△L）</p><p>边际产量曲线与平均产量曲线相交于平均产量曲线的最高点。在相交前，平均产量是递增的，边际产量大于平均产量。在相交后，平均产量是递减的，边际产量小于平均产量。在相交时，平均产量达到最大，边际产量等于平均产量。</p><h2><a name='header-n20' class='md-header-anchor '></a>边际报酬递减规律</h2><p><u>边际产量曲线呈现先上升，达到最高点后出现下降的趋势，这种现象称为边际报酬递减规律，也被称为边际收益递减规律。</u></p><h2><a name='header-n22' class='md-header-anchor '></a>一种可变生产要素的合理投入</h2><p>将产量的变化划分为三个阶段：</p><ul><li><p>第I阶段，劳动量从0增加到AP与MP的交点A横坐标处，在这个过程中，由于MP&gt;AP，只要生产者增加可变要素劳动的投入量，总产量就会增加。因此，以利润最大化为目标的企业不会在这个阶段停产。</p></li><li><p>第II阶段，劳动量从A增加到MP与横坐标交点B的横坐标处，在这个区间，MP&gt;0，所以增加劳动量总产量会增加，并且在B点处达到最大值。</p></li><li><p>第III阶段，劳动量超过B以后，此时MP&lt;0，劳动的平均产量下降，总产量也开始下降。所以理性的生产者不会选择增加这一阶段的劳动投入量，而是会减少劳动投入量。</p><p>通常，厂商的劳动投入停留在第II阶段，但在这一区域中，生产者投入多少可变要素，可生产多少产品，必须结合成本函数才能确定。</p></li></ul><p>&nbsp;</p><h1><a name='header-n33' class='md-header-anchor '></a>长期生产函数</h1><h2><a name='header-n34' class='md-header-anchor '></a>等产量线</h2><p><u>等产量线：在技术水平不变的条件下，生产同一产量的两种生产要素投入量的各种不同组合的轨迹。</u></p><p>等产量线的特点：</p><ul><li>向右下方倾斜的线，其斜率为负值</li><li>在同一平面上，可以有无数条等产量线</li><li>在同一平面上，任意两条等产量线不能相交</li><li>等产量线是一条凸向原点的线，这是由边际技术替代率递减所决定的。</li></ul><h2><a name='header-n46' class='md-header-anchor '></a>边际技术替代率</h2><p>在产量保持不变的前提条件下，增加一单位某种生产要素可以代替另一重要素的数量。</p><p>MRTS(LK)代表劳动（分母）代替资本（分子）的边际技术替代率，公式为：</p><p>MRTS(LK) = -△K/△L</p><h2><a name='header-n50' class='md-header-anchor '></a>边际技术替代率递减规律</h2><p>在产量不变的条件下，当一种生产要素的投入量不断增加时，每一单位该要素所能代替的另一种生产要素的数量是递减的，这种现象称为边际技术替代率递减规律。</p><p><strong>边际技术替代率递减主要是因为边际报酬递减规律在起作用。</strong></p><h2><a name='header-n53' class='md-header-anchor '></a>等成本线</h2><p>C = w<em>L + r</em>K（横轴为L，纵轴为K）</p><p>得 K = -w/r * L + c/r </p><p>其中C为成本，L为劳动，K为资本，w为劳动的价格即工资率，r为资本的价格即利息率</p><ul><li>在成本保持不变时，两种要素价格同比例变动，引起成本线平行移动。同比例增加时，等成本曲线左移</li><li>当成本保持不变，只有一种要素价格变化时，等成本线会发生旋转。如成本和资本价格K既定，如果劳动的价格上升，则购买数量减少，等成本线向左下方旋转</li><li>当两要素价格保持不变，只有成本发生变化时，等成本线会发生旋转：如果成本增加，则等成本线向右上方旋转。</li></ul><h2><a name='header-n64' class='md-header-anchor '></a>生产要素投入量的最优组合</h2><p>只有当等成本线与等产量线相切的时候，才是生产要素的最佳组合点，在这一点上，等成本线与等产量线的斜率相等，即：</p><p>P(L)/P(K) = MP(L)/MP(K)  或  MP(L)/P(L) = MP(K)/P(K)</p><p>当在劳动和资本上每投入1元钱所增加的产量都相等时，劳动和资本之间的组合比例为最优。</p><h2><a name='header-n68' class='md-header-anchor '></a>生产拓展线</h2><p>生产扩展性的经济学含义：在企业不断增加成本或不断提高产量，即不断扩大生产规模的过程中，只要将生产要素沿着生产扩展性进行组合，总能保证产量既定的条件下实现成本最小，或在成本既定的条件下实现产量最大。</p><p>&nbsp;</p><h1><a name='header-n71' class='md-header-anchor '></a>生产的规模报酬</h1><h2><a name='header-n72' class='md-header-anchor '></a>规模报酬的含义</h2><p><u>规模报酬：在其他条件不变的情况下，企业内部各种生产要素按相同比例变化时所带来的产量变化。</u></p><p>注意：</p><ul><li>规模经济发生作用的条件是以技术不变为前提的</li><li>在生产中使用的两种可变投入要素是按同比例增加的，且不考虑技术系数变化的影响，以及由于生产组织规模的调整对产量的影响。</li><li>两种生产要素增加所引起的产量或收益变动的情况，就如同边际效益递减规律发送作用一样，也有规模报酬递增、规模报酬不变以及规模报酬递减三个阶段。</li></ul><h2><a name='header-n82' class='md-header-anchor '></a>影响规模报酬的原因</h2><h3><a name='header-n83' class='md-header-anchor '></a>影响规模报酬递增的原因（老子生大）</h3><ul><li>劳动分工使生产的专业化程度提高，从而提高劳动生产率</li><li>资源的集约化使用</li><li>生产要素的不可分性</li><li>大规模厂商较强的讨价还价能力</li></ul><h3><a name='header-n93' class='md-header-anchor '></a>影响规模报酬递减的原因</h3><ul><li>生产要素可得性的限制</li><li>生产规模较大的产商在管理上的效率会下降</li></ul><p>&nbsp;</p><h1><a name='header-n100' class='md-header-anchor '></a>例题</h1><ul><li><p>一个企业主在考虑再雇佣一名工人时，在劳动的平均产量和边际产量中他更关心哪一个？为什么？</p><p>一个企业主在考虑再雇佣一名工人时，在劳动的平均产量和边际产量中他将更关心劳动的边际产量。我们知道，厂商的理性决策在劳动的第Ⅱ阶段，在这个区域中，劳动的平均产量及边际产量都是递减的，但其中却可能存在着使利润极大化的点，劳动第Ⅱ阶段的右界点是使劳动的边际产量为零的点。因此，只要增雇的这名工人的边际产量大于零，即能够带来总产量的增加，企业主就可能雇佣他。</p></li></ul></div>
+</body>
+</html>

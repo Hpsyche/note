@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>6.厂商均衡理论</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+:root { --side-bar-bg-color: #fafafa; --control-text-color: #777; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: normal; src: local("Open Sans Regular"), url("./github/400.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: normal; src: local("Open Sans Italic"), url("./github/400i.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: bold; src: local("Open Sans Bold"), url("./github/700.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: bold; src: local("Open Sans Bold Italic"), url("./github/700i.woff") format("woff"); }
+html { font-size: 16px; }
+body { font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color: rgb(51, 51, 51); line-height: 1.6; }
+#write { max-width: 860px; margin: 0px auto; padding: 30px 30px 100px; }
+#write > ul:first-child, #write > ol:first-child { margin-top: 30px; }
+a { color: rgb(65, 131, 196); }
+h1, h2, h3, h4, h5, h6 { position: relative; margin-top: 1rem; margin-bottom: 1rem; font-weight: bold; line-height: 1.4; cursor: text; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor { text-decoration: none; }
+h1 tt, h1 code { font-size: inherit; }
+h2 tt, h2 code { font-size: inherit; }
+h3 tt, h3 code { font-size: inherit; }
+h4 tt, h4 code { font-size: inherit; }
+h5 tt, h5 code { font-size: inherit; }
+h6 tt, h6 code { font-size: inherit; }
+h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+h3 { font-size: 1.5em; line-height: 1.43; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 1em; color: rgb(119, 119, 119); }
+p, blockquote, ul, ol, dl, table { margin: 0.8em 0px; }
+li > ol, li > ul { margin: 0px; }
+hr { height: 2px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border: 0px none; overflow: hidden; box-sizing: content-box; }
+li p.first { display: inline-block; }
+ul, ol { padding-left: 30px; }
+ul:first-child, ol:first-child { margin-top: 0px; }
+ul:last-child, ol:last-child { margin-bottom: 0px; }
+blockquote { border-left: 4px solid rgb(223, 226, 229); padding: 0px 15px; color: rgb(119, 119, 119); }
+blockquote blockquote { padding-right: 0px; }
+table { padding: 0px; word-break: initial; }
+table tr { border-top: 1px solid rgb(223, 226, 229); margin: 0px; padding: 0px; }
+table tr:nth-child(2n), thead { background-color: rgb(248, 248, 248); }
+table tr th { font-weight: bold; border-width: 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-left-style: solid; border-top-color: rgb(223, 226, 229); border-right-color: rgb(223, 226, 229); border-left-color: rgb(223, 226, 229); border-image: initial; border-bottom-style: initial; border-bottom-color: initial; text-align: left; margin: 0px; padding: 6px 13px; }
+table tr td { border: 1px solid rgb(223, 226, 229); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr th:first-child, table tr td:first-child { margin-top: 0px; }
+table tr th:last-child, table tr td:last-child { margin-bottom: 0px; }
+.CodeMirror-lines { padding-left: 4px; }
+.code-tooltip { box-shadow: rgba(0, 28, 36, 0.3) 0px 1px 1px 0px; border-top: 1px solid rgb(238, 242, 242); }
+.md-fences, code, tt { border: 1px solid rgb(231, 234, 237); background-color: rgb(248, 248, 248); border-radius: 3px; padding: 2px 4px 0px; font-size: 0.9em; }
+code { background-color: rgb(243, 244, 244); padding: 0px 4px 2px; }
+.md-fences { margin-bottom: 15px; margin-top: 15px; padding: 8px 1em 6px; }
+.md-task-list-item > input { margin-left: -1.3em; }
+@media print {
+  html { font-size: 13px; }
+  table, pre { break-inside: avoid; }
+  pre { word-wrap: break-word; }
+}
+.md-fences { background-color: rgb(248, 248, 248); }
+#write pre.md-meta-block { padding: 1rem; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border: 0px; border-radius: 3px; color: rgb(119, 119, 119); margin-top: 0px !important; }
+.mathjax-block > .code-tooltip { bottom: 0.375rem; }
+.md-mathjax-midline { background: rgb(250, 250, 250); }
+#write > h3.md-focus::before { left: -1.5625rem; top: 0.375rem; }
+#write > h4.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h5.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h6.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+.md-image > .md-meta { border-radius: 3px; padding: 2px 0px 0px 4px; font-size: 0.9em; color: inherit; }
+.md-tag { color: rgb(167, 167, 167); opacity: 1; }
+.md-toc { margin-top: 20px; padding-bottom: 20px; }
+.sidebar-tabs { border-bottom: none; }
+#typora-quick-open { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); }
+#typora-quick-open-item { background-color: rgb(250, 250, 250); border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238); border-style: solid; border-width: 1px; }
+.on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.12); }
+header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", Arial, sans-serif; }
+.file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state { visibility: visible; }
+.mac-seamless-mode #typora-sidebar { background-color: var(--side-bar-bg-color); }
+.md-lang { color: rgb(180, 101, 77); }
+.html-for-mac .context-menu { --item-hover-bg-color: #E6F0FE; }
+#md-notification .btn { border: 0px; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); }
+
+
+
+
+
+ .typora-export p, .typora-export .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><p><u>市场：从事物品买卖的交易场所和接洽点。</u></p><p>市场类型的划分和特征：</p><figure><table><thead><tr><th>市场类型</th><th>厂商数目</th><th>产品差别程度</th><th>对价格控制的程度</th><th>进出行业难易程度</th><th>接近哪种商品市场</th></tr></thead><tbody><tr><td>完全竞争</td><td>很多</td><td>完全无差别</td><td>没有</td><td>很容易</td><td>一些农产品，大米市场</td></tr><tr><td>垄断竞争</td><td>很多</td><td>有差别</td><td>有一些</td><td>比较容易</td><td>一些轻工产品、零售业</td></tr><tr><td>寡头</td><td>几个</td><td>有差别或无差别</td><td>相当程度</td><td>比较困难</td><td>钢、汽车、石油</td></tr><tr><td>垄断</td><td>唯一</td><td>唯一的产品，且无相近的替代品</td><td>很大程度，但经常受到管制</td><td>很困难，几乎不可能</td><td>公用事业，如水、电</td></tr></tbody></table></figure><h1><a name='header-n39' class='md-header-anchor '></a>完全竞争市场</h1><p>特点：</p><ul><li>市场上有无数的生产者和消费者，并且每个生产者和消费者所占的市场份额极小</li><li>市场上的产品都是同质的，即任何一生产者的产品都是无差别的</li><li>产商进入或退出一个行业是完全自由的</li><li>市场信息是完全的和对称的</li></ul><h2><a name='header-n50' class='md-header-anchor '></a>完全竞争市场的均衡</h2><p><em>注意：完全竞争市场也存在垄断因素</em></p><h3><a name='header-n52' class='md-header-anchor '></a>完全竞争市场的短期均衡</h3><p>产商实现利润最大化的均衡条件是：边际收益等于边际成本，即MR=MC</p><p>在利润最大化的产量上，在短期内，企业有可能获得利润，也有可能亏损，也可能盈亏相抵。</p><p>完成竞争市场的短期均衡可以具体表现为以下五种情况：</p><ul><li><p>平均收益大于平均成本，即AR&gt;SAC，厂商获得利润（超额利润），π&gt;0</p></li><li><p>平均收益等于平均成本，即AR=SAC，SMC与SAC曲线的交点为厂商的收支相抵点。厂商经济利润为零，厂商仅仅获得正常利润。π=0，P=AR=MC=Min(SAC)</p></li><li><p>平均收益小于平均总成本，但大于平均可变成本，即-FC&lt;π&lt;0，AVC&lt;P=MR=AR&lt;SAC，厂商虽然亏损，但仍然生产。因为只有这样，厂商才能在用全部收益弥补全部的可变成本之后，还能弥补在短期内总是存在的不变成本的一部分。</p><p>所以在这种情况下，生产要比不生产强</p></li><li><p>平均收益等于平均可变成本，即AR=AVC，π=-FC&lt;0，此时厂商亏损，处于生产与不生产的临界点。所以SMC曲线与AVC曲线的交点也称为停止营业点和关闭点。</p></li><li><p>平均收益小于可变成本，即AR&lt;AVC，π&lt;-FC,此时厂商亏损，且不生产要比生产强。</p></li></ul><p>由上可见，利润最大化不意味着厂商一定能赚钱。当在厂商处于短期均衡时，不是利润最大化就是损失最小化。</p><h3><a name='header-n69' class='md-header-anchor '></a>完全竞争市场的长期均衡</h3><p>在长期的生产中，完全竞争市场实现利润最大化的均衡条件MR=LMC</p><p>长期均衡条件：</p><ul><li>长期内，企业亏损的情况不会继续下去</li><li>短期内，如果行业的单个厂商可以获得利润，则会吸引其他新的厂商加入这个行业</li></ul><p>则在长期均衡下：行业中的每一个企业都处于既无利润又不亏损的状态，即“零利润均衡”，企业的经济利润为零，获得全部“正常利润”。</p><p>厂商长期均衡点处于长期平均成本的最低点：有P=AR=MR=SMC=LMC=SAC=LAC，这就是完全竞争市场的长期均衡条件。</p><p>&nbsp;</p><h1><a name='header-n80' class='md-header-anchor '></a>完全垄断市场</h1><p>垄断形成的原因：</p><ul><li>专利与专营权的控制</li><li>规模经济的需要</li><li>独家厂商控制了生产某种商品的全部资源或基本资源的供给</li></ul><h2><a name='header-n89' class='md-header-anchor '></a>完全垄断市场的需求曲线</h2><p>假定线性的反需求函数为：P=a-bQ</p><p>则TR = P * Q = (a-bQ) * Q = aQ - bQ2</p><p>MR = dTR/dQ = a-2bQ</p><p>即垄断厂商的边际收益曲线的下降速度是其需求曲线的下降速度的2倍，</p><p>且有：MR=P(1-1/e(d))，其中e(d)为需求的价格弹性，e(d) = -dQ/dP * P/Q</p><ul><li>当e(d)&gt;1时，MR&gt;0，这时厂商总收益TR随销售量Q的增加而增加</li><li>当e(d)=1时，MR=0，这是厂商总收益TR达到最大值</li><li>当e(d)&lt;1时，MR&lt;0，这时厂商总收益TR随销售量Q的增加而减少</li></ul><h2><a name='header-n102' class='md-header-anchor '></a>完全垄断市场的均衡</h2><h3><a name='header-n103' class='md-header-anchor '></a>完全垄断市场的短期均衡</h3><ul><li><p>存在超额利润的短期均衡，即AR&gt;SAC</p></li><li><p>无超额利润的短期均衡，即AR=SAC</p></li><li><p>存在亏损的短期均衡，即AVC&lt;AR&lt;SAC</p><p>此时可以：做广告，让需求曲线上移；扩大生产规模</p></li><li><p>停止营业点的短期均衡，即AR=AVC</p></li><li><p>退出行业的短期均衡，即AR&lt;AVC</p></li></ul><p>综上所述，在完全垄断市场上，厂商达到短期均衡的条件下MR=SMC。完全垄断厂商在短期均衡点上可能获得超额利润，也可能只获得正常利润，还可能蒙受亏损。</p><h3><a name='header-n117' class='md-header-anchor '></a>完全垄断市场的长期均衡</h3><p>条件：MR=LMC=SMC</p><h2><a name='header-n119' class='md-header-anchor '></a>完全垄断市场的定价策略</h2><p><u>差别定价又称价格歧视，是指以不同的价格销售生产成本相同的同一种产品。</u></p><h3><a name='header-n121' class='md-header-anchor '></a>实行价格歧视的条件</h3><ul><li>市场存在着不完全性</li><li>各个市场对同种产品的需求弹性是不同的</li><li>能够有效地把不同市场或市场的各个部分分隔开来</li></ul><h3><a name='header-n129' class='md-header-anchor '></a>价格歧视的类型</h3><ul><li>一级价格歧视（按愿意支付的最高价出售）</li><li>二级价格歧视（不同购买数量不同价格）</li><li>三级价格歧视（把总的市场分为若干个市场，不同市场不同价格，现实最为普遍）</li></ul><p>&nbsp;</p><h1><a name='header-n138' class='md-header-anchor '></a>垄断竞争市场</h1><p>现实中最为常见的一种市场，在零售业和服务业中常见。</p><p>两种需求曲线：d曲线（主观需求曲线）和D曲线（客观需求曲线）</p><p>d曲线：当一个厂商降低自己产品价格，该行业中其他与之竞争的产商并不随之改变价格</p><p>D曲线：当一个厂商降低自己产品价格，该行业中其他与之竞争的产商随之改变价格</p><p>&nbsp;</p><h1><a name='header-n144' class='md-header-anchor '></a>寡头垄断市场</h1><p>具有代表性的寡头垄断企业是汽车工业。</p><h2><a name='header-n146' class='md-header-anchor '></a>寡头垄断市场的特点</h2><ul><li>行业中只有少数几家大厂商供给该行业全部或大部分产品，每个厂家的产量占市场总量的相当份额，对市场价格和产量有举重若轻的影响</li><li>厂商之间相互依存、相互影响、相互制约</li><li>产品的同质或者异质</li><li>市场进出不易</li></ul><h2><a name='header-n156' class='md-header-anchor '></a>寡头垄断市场产量和价格的决定</h2><p>古诺模型和斯威齐模型是假定各家寡头并不相互勾结，而卡特尔属于有正式勾结的寡头模型。</p><h3><a name='header-n158' class='md-header-anchor '></a>斯威齐模型</h3><p>又称为弯折的需求曲线模型</p><p>其中寡头厂商的态度是：跟跌不跟涨，即”涨价掉粉“，”降价竞争“</p><p>&nbsp;</p><h1><a name='header-n162' class='md-header-anchor '></a>例题</h1><ul><li>完全竞争市场的产商有没有必要做广告？</li></ul><p>没有必要。①在完全竞争市场中，厂商之间提供的商品是完全无差别的，是同质的，而且完全竞争市场没有超额利润，做广告不会影响产品的销量，自然也不影响收益。②做广告使得成本增加</p><ul><li>某一彩电制造商认为他所在的行业是完全竞争行业。他觉得同其他彩电制造商之间存在激烈的竞争，其他彩电制造商一旦大做广告，采取降价措施或提高服务质量时，他也及时做出反应。请你根据所学的有关完全竞争知识判断彩电制造商所在行业是完全竞争行业吗？</li></ul><p>彩电制造商所在行业不是完全竞争市场。因为完全竞争市场假定存在很多买家和卖家，无需把其他人作为竞争对手。完全竞争市场中的产品是同质的，厂商之间没有必要进行广告、降价等方面的竞争，故彩电制造商所在行业不是完全竞争行业。</p><p>&nbsp;</p><p>&nbsp;</p></div>
+</body>
+</html>

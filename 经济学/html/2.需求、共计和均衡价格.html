@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>2.需求、共计和均衡价格</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+:root { --side-bar-bg-color: #fafafa; --control-text-color: #777; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: normal; src: local("Open Sans Regular"), url("./github/400.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: normal; src: local("Open Sans Italic"), url("./github/400i.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: bold; src: local("Open Sans Bold"), url("./github/700.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: bold; src: local("Open Sans Bold Italic"), url("./github/700i.woff") format("woff"); }
+html { font-size: 16px; }
+body { font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color: rgb(51, 51, 51); line-height: 1.6; }
+#write { max-width: 860px; margin: 0px auto; padding: 30px 30px 100px; }
+#write > ul:first-child, #write > ol:first-child { margin-top: 30px; }
+a { color: rgb(65, 131, 196); }
+h1, h2, h3, h4, h5, h6 { position: relative; margin-top: 1rem; margin-bottom: 1rem; font-weight: bold; line-height: 1.4; cursor: text; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor { text-decoration: none; }
+h1 tt, h1 code { font-size: inherit; }
+h2 tt, h2 code { font-size: inherit; }
+h3 tt, h3 code { font-size: inherit; }
+h4 tt, h4 code { font-size: inherit; }
+h5 tt, h5 code { font-size: inherit; }
+h6 tt, h6 code { font-size: inherit; }
+h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+h3 { font-size: 1.5em; line-height: 1.43; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 1em; color: rgb(119, 119, 119); }
+p, blockquote, ul, ol, dl, table { margin: 0.8em 0px; }
+li > ol, li > ul { margin: 0px; }
+hr { height: 2px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border: 0px none; overflow: hidden; box-sizing: content-box; }
+li p.first { display: inline-block; }
+ul, ol { padding-left: 30px; }
+ul:first-child, ol:first-child { margin-top: 0px; }
+ul:last-child, ol:last-child { margin-bottom: 0px; }
+blockquote { border-left: 4px solid rgb(223, 226, 229); padding: 0px 15px; color: rgb(119, 119, 119); }
+blockquote blockquote { padding-right: 0px; }
+table { padding: 0px; word-break: initial; }
+table tr { border-top: 1px solid rgb(223, 226, 229); margin: 0px; padding: 0px; }
+table tr:nth-child(2n), thead { background-color: rgb(248, 248, 248); }
+table tr th { font-weight: bold; border-width: 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-left-style: solid; border-top-color: rgb(223, 226, 229); border-right-color: rgb(223, 226, 229); border-left-color: rgb(223, 226, 229); border-image: initial; border-bottom-style: initial; border-bottom-color: initial; text-align: left; margin: 0px; padding: 6px 13px; }
+table tr td { border: 1px solid rgb(223, 226, 229); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr th:first-child, table tr td:first-child { margin-top: 0px; }
+table tr th:last-child, table tr td:last-child { margin-bottom: 0px; }
+.CodeMirror-lines { padding-left: 4px; }
+.code-tooltip { box-shadow: rgba(0, 28, 36, 0.3) 0px 1px 1px 0px; border-top: 1px solid rgb(238, 242, 242); }
+.md-fences, code, tt { border: 1px solid rgb(231, 234, 237); background-color: rgb(248, 248, 248); border-radius: 3px; padding: 2px 4px 0px; font-size: 0.9em; }
+code { background-color: rgb(243, 244, 244); padding: 0px 4px 2px; }
+.md-fences { margin-bottom: 15px; margin-top: 15px; padding: 8px 1em 6px; }
+.md-task-list-item > input { margin-left: -1.3em; }
+@media print {
+  html { font-size: 13px; }
+  table, pre { break-inside: avoid; }
+  pre { word-wrap: break-word; }
+}
+.md-fences { background-color: rgb(248, 248, 248); }
+#write pre.md-meta-block { padding: 1rem; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border: 0px; border-radius: 3px; color: rgb(119, 119, 119); margin-top: 0px !important; }
+.mathjax-block > .code-tooltip { bottom: 0.375rem; }
+.md-mathjax-midline { background: rgb(250, 250, 250); }
+#write > h3.md-focus::before { left: -1.5625rem; top: 0.375rem; }
+#write > h4.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h5.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h6.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+.md-image > .md-meta { border-radius: 3px; padding: 2px 0px 0px 4px; font-size: 0.9em; color: inherit; }
+.md-tag { color: rgb(167, 167, 167); opacity: 1; }
+.md-toc { margin-top: 20px; padding-bottom: 20px; }
+.sidebar-tabs { border-bottom: none; }
+#typora-quick-open { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); }
+#typora-quick-open-item { background-color: rgb(250, 250, 250); border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238); border-style: solid; border-width: 1px; }
+.on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.12); }
+header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", Arial, sans-serif; }
+.file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state { visibility: visible; }
+.mac-seamless-mode #typora-sidebar { background-color: var(--side-bar-bg-color); }
+.md-lang { color: rgb(180, 101, 77); }
+.html-for-mac .context-menu { --item-hover-bg-color: #E6F0FE; }
+#md-notification .btn { border: 0px; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); }
+
+
+
+
+
+ .typora-export p, .typora-export .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><h1><a name='header-n0' class='md-header-anchor '></a>需求理论</h1><h2><a name='header-n2' class='md-header-anchor '></a>需求的含义</h2><p><u>需求：消费者在某一特定时期内，在每一价格水平上愿意而且能够购买的商品量。</u></p><p>需同时具备购买欲望和购买能力，才能形成有效需求。</p><h2><a name='header-n5' class='md-header-anchor '></a>影响需求的因素</h2><ul><li>商品本身的价格</li><li>相关商品的价格</li><li>消费者的收入水平</li><li>消费者偏好</li><li>消费者对未来的预期</li><li>政府的政策</li></ul><h2><a name='header-n19' class='md-header-anchor '></a>需求定理</h2><p>商品的需求量与价格呈反比，原因：</p><ul><li>替代效应</li><li>收入效应</li></ul><h3><a name='header-n26' class='md-header-anchor '></a>需求定理的例外</h3><ul><li><p>吉芬商品</p><p>价格上升引起需求量增加的低档商品统称为吉芬商品（爱尔兰灾荒马铃薯）</p></li><li><p>炫耀性商品</p><p>价格越高，其炫耀作用越强，需求量越大</p></li></ul><h2><a name='header-n34' class='md-header-anchor '></a>需求量的变动与需求的变动</h2><p>需求量的变动是指在其他条件不变时，由商品本身价格的变动而引起的对该商品需求量的变动。</p><p>需求的变动是指在某商品价格不变的条件下，由于其他因素的变动所引起的该商品的需求数量的变动。</p><p>在需求曲线图上，需求的变动表现为需求曲线的位置发生移动，整个需求曲线向右上方移动是需求增加，向左下方移动是需求减少。</p><p>&nbsp;</p><h1><a name='header-n39' class='md-header-anchor '></a>供给理论</h1><p><u>供给：在某一特点时期内，在每一价格水平上厂商愿意而且能够提高的商品数量。</u></p><p>两个条件：厂商有出售的愿望；厂商有供应的能力</p><h2><a name='header-n42' class='md-header-anchor '></a>影响供给的因素</h2><ul><li>商品本身的价格</li><li>相关商品的价格</li><li>生产要素的价格</li><li>厂商的生产技术和管理水平</li><li>厂商对未来的期望</li><li>政府的税收政策</li></ul><h2><a name='header-n56' class='md-header-anchor '></a>供给理论</h2><p>在其他条件不变的前提下，商品的供给量与其价格同方向变动，价格上升，供给量增加，价格下降，供给量减少。</p><h3><a name='header-n58' class='md-header-anchor '></a>供给定理的例外</h3><ul><li>某种程度下的矿泉水（平行于X轴的线）</li><li>土地（垂直于X轴的线）</li><li>劳动（向后弯折）</li></ul><h2><a name='header-n66' class='md-header-anchor '></a>供给量的变动与供给的变动</h2><p>供给量的变动是指在其他条件不变时，由商品本身价格的变动而引起的对该商品供给量的变动。</p><p>供给的变动是指在某商品价格不变的条件下，由于其他因素的变动所引起的该商品的供给数量的变动。</p><p>&nbsp;</p><h1><a name='header-n70' class='md-header-anchor '></a>均衡价格的决定</h1><p>在市场经济汇总，均衡价格的形成是由供求双方在竞争过程中自发形成的。</p><p><u>均衡价格：一种商品的需求和供给相等时的价格，这时商品的需求量和供给量也相等，成为均衡数量</u></p><p><u>供求定理：在其他条件不变的情况下，需求变动引起均衡价格与均衡数量的同方向变动，供给变动引起均衡价格的反方向变动，而引起均衡数量的同方向变动。</u></p><ul><li>D↑，S↑，则Q↑，P不确定</li><li>D↓，S↓，则Q↓，P不确定</li><li>D↑，S↓，则Q不确定，P↑</li><li>D↓，S↑，则Q不确定，P↓</li></ul><h2><a name='header-n83' class='md-header-anchor '></a>均衡价格理论的运用</h2><h3><a name='header-n84' class='md-header-anchor '></a>支持价格</h3><p>也称最低限价，政府为了扶持某一行业而规定的该行业产品的最低价格，<strong>支持价格一定是高于均衡价格的</strong></p><p>支持价格一般被用于农产品的价格政策中。</p><h3><a name='header-n87' class='md-header-anchor '></a>限制价格</h3><p>也称最高限价，政府为了防止物价上涨而规定的某种产品的最高价格，<strong>限制价格一定是低于均衡价格的。</strong></p><p>&nbsp;</p><h1><a name='header-n90' class='md-header-anchor '></a>弹性理论</h1><h2><a name='header-n91' class='md-header-anchor '></a>需求弹性</h2><h3><a name='header-n92' class='md-header-anchor '></a>需求价格弹性</h3><ul><li>弧弹性</li></ul><p>Ed=- Q/P * (P1+P2)/(Q1+Q2)</p><p>例如，A点对应的价格为5元，需求量为60千克，B点对应的价格为2元，需求量为70千克。计算A、B两点之间的弹性。</p><p>Ed=- (70-60)/(2-5) * (2+5)/(70+60) = 0.179</p><ul><li>点弹性</li></ul><p>Ed=-dQ/dP * P/Q</p><p>例如，已知某商品的需求函数为Q=20-2P，则：</p><p>Ed=-(-2)* P/(20-2P)</p><p>据此可以计算出任一价格水平上该商品的需求弹性系数</p><h4><a name='header-n106' class='md-header-anchor '></a>需求价格弹性的分类</h4><ul><li><p>完全无弹性。（无论价格怎样变动，需求量始终不变）</p><p>火葬费、自来水费</p></li><li><p>完全弹性。（极微小的变动会引起需求量的极大的改变）</p><p>黄金、战争时期的常规军用物资等。</p></li><li><p>单位弹性</p><p>正双曲线</p></li><li><p>富有弹性</p><p>奢侈品，高档消费品</p></li><li><p>缺乏弹性</p><p>生活必需品</p></li></ul><h4><a name='header-n123' class='md-header-anchor '></a>影响需求价格弹性的因素</h4><ul><li>商品的必需程度</li><li>商品的可替代性</li><li>商品的消费支出在总支出中的占比</li><li>购买欲望</li><li>用途的广泛性</li><li>使用时间</li></ul><h3><a name='header-n137' class='md-header-anchor '></a>需求收入弹性</h3><p>Ey= △Q/△Y * Y/Q</p><ul><li>当Ey&gt;0时，说明这种商品的需求量将随着收入的增加而增加，经济学中称为正常品。其中，0&lt;Ey&lt;1的商品，需求量的变动的幅度小于收入变动的幅度，称为生活必需品，如粮食、服装等；Ey&gt;1的商品，需求量变动的幅度大于收入变动的幅度，称为奢侈品，如名牌时装、名贵首饰、旅游等。</li><li>当Ey=0时，说明这种商品的需求量与收入无关，称这种商品为收入中性品。</li><li>当Ey&lt;0时，说明这类商品的需求量将随着收入的增加而减少，这类商品称为劣等品，如土豆、玉米面、高粱米等。</li></ul><h3><a name='header-n146' class='md-header-anchor '></a>需求交叉弹性</h3><p>Exy= △Qx/△Py * Py/Qx</p><ul><li>当Exy&gt;0时，表示X商品的<font color=red>需求量</font>与Y商品的<font color=red>价格</font>同向变动，则X与Y为替代商品，如茶叶和咖啡，橘子和苹果等</li><li>当Exy&lt;0时，表示X商品的<font color=red>需求量</font>与Y商品的<font color=red>价格</font>反向变动，则X与Y为互补商品，如照相机和胶卷等</li><li>当Exy=0时，表示X商品的<font color=red>需求量</font>对Y商品的<font color=red>价格</font>无影响，则两种商品毫不相关。</li></ul><h2><a name='header-n155' class='md-header-anchor '></a>供给弹性</h2><h3><a name='header-n156' class='md-header-anchor '></a>影响供给价格弹性的因素</h3><ul><li>进入和退出的难易程度</li><li>生产的技术类型</li><li>时间的长短</li><li>产量的大小</li></ul><h2><a name='header-n166' class='md-header-anchor '></a>弹性理论的运用</h2><h3><a name='header-n167' class='md-header-anchor '></a>需求价格弹性与总收益</h3><p>对于需求富有弹性的商品，其价格与总收益呈反方向变动；</p><p>对于需求缺乏弹性的商品，其价格与总收益呈同方向变动。</p><h3><a name='header-n170' class='md-header-anchor '></a>蛛网理论</h3><p>主要用于分析农产品价格和产量的波动。</p><ul><li><p>收敛型蛛网</p><p>当供给曲线的价格弹性小于需求曲线的价格弹性，即供给曲线斜率的绝对值大于需求曲线斜率的绝对值时，价格和产量的波动幅度会越来越小，直至达到均衡。</p></li><li><p>发散型蛛网</p><p>当供给曲线的价格弹性大于需求曲线的价格弹性，即供给曲线斜率的绝对值小于需求曲线斜率的绝对值时，价格和产量的波动幅度会越来越大，形成一个向外发散型的蛛网，越来越背离均衡。</p></li><li><p>封闭型蛛网</p><p>当供给曲线的价格弹性大于需求曲线的价格弹性，即供给曲线斜率的绝对值小于需求曲线斜率的绝对值时，价格变动对供给量的影响与其对需求量的影响相同，此时价格和产量以同一幅度围绕均衡点上下波动，其偏离均衡点的距离既不扩大也不缩小。</p></li></ul><p>&nbsp;</p><h1><a name='header-n183' class='md-header-anchor '></a>例题</h1><ul><li><p>在情人节为什么玫瑰价格猛涨而巧克力价格涨幅甚微呢？</p><p>玫瑰花需要种植，生产周期长，也就意味着短期供给弹性小，短期供给是相对刚性的。这样需求明显增加后会引起价格的显著上升； 相比之下，巧克力的生产主要是工业化的，短期供给富有弹性，因此当需求上升后供给也会随价格变动明显增加，不至于引起太大的市场价格波动。</p></li><li><p>“谷太贱则伤农，太贵则伤末”（苏轼语）。请你运用经济学原理分析这种现象。    </p><p>谷贱伤农是我国流传已久的一句俗语，指在丰收的年份，农民的收入反而减少的现象。造成这种现象的根本原因在于农产品是缺乏弹性的商品，农产品均衡价格的下降幅度大于均衡数量的增加幅度，致使农民收入减少。与此类似，在歉收年份，由于缺乏弹性的需求曲线的作用，农产品的均衡价格的上升幅度大于农产品均衡数量的减少幅度，致使农民的总收入增加。</p></li><li><p>你是一个大型艺术博物馆的馆长。如果你的财务经理告诉你，博物馆缺乏资金，并建议你考虑改变门票价格以增加总收益。你将怎么办呢？你是要提高门票价格，还是降低门票价格？</p><p>降低门票价格。“薄利多销”。 根据需求的价格弹性与销售收入之间的关系，对需求富于弹性的商品来说，其销售收入与价格成反方向变动，即它随价格的提高而减少，随价格的降低而增加；而对需求缺乏弹性的商品来说，其销售收入与价格成正方向变动，即它随价格的提高而增加，随价格的降低而减少。而大型艺术博物馆门票属于富有弹性的商品，为了提高生产者的收入应该采取降价的办法。</p></li></ul></div>
+</body>
+</html>
