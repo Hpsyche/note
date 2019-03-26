@@ -279,3 +279,4 @@ public class RuntimeConstantPoolOOM{
 * 在JDK1.6中，intern()方法会把首次遇到的字符串实例复制到永生代中，返回的也是永生代中这个字符串实例的引用，而由Stringbuilder创建的字符串实例在Java堆上，所以必然不是同一个引用，将返回false；
 * 而在JDK1.7中，inern()实现不会再复制实例，只是在常量池中记录首次出现的实例引用，因而返回的是同一个实例；
 * str2比较返回false是因为“java”这个字符串在执行StringBuilder.toString()之前已经出现过，字符串常量池也有它的引用了，不符合“首次出现”的原则，因此为“false”。
+
