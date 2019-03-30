@@ -1,3 +1,5 @@
+[TOC]
+
 ![](D:\Work\TyporaNotes\note\前端知识\Ajax\pict\ajax原理.png)
 
 ## 原理图
