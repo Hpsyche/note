@@ -1,3 +1,5 @@
+[TOC]
+
 ## 基础语法部分
 
 * true false null不是关键字，是直接量
@@ -207,17 +209,131 @@
 
     这说明 i++ 并不是一个原子操作。因为，它分成了三步，有可能当某个线程执行到了第②时被中断了，那么就意味着只执行了其中的两个步骤，没有全部执行。
 
+## 集合部分
 
+### 固定长度的List
 
+Arrays.ArrayList是一个固定长度的List集合，程序只能遍历访问集合里的元素，不可以增加、删除该集合里的元素。
 
+### Queue集合
 
+Queue用于模拟队列，即“先进先出”，有如下方法：
 
+void add(Object e);
+Object element(); （获取队列头部的元素，但是不是删除元素）
+boolean offer(Object e):将制定元素加入此队列的尾部，当使用有容量限制的队列时，此方法通常会比add(Object e)更好
+Object peek()：获取队列头部的元素，但是不删除元素，如果队列为空，则返回null
+Object poll()：获取队列头部的元素，并删除该元素，如果队列为空，则返回null
+Object remove()：获取队列头部的元素，并删除该元素
 
+### Deque接口
 
+Queue还有一个接口Deque，Deque代表“双向队列”，即其既可以当成队列使用，也可以当成栈使用。
 
+其中如下方法：
+addFirst\addLast\getFirst\getLast等方法。
 
+### Hashtable
 
+从Hashtable的类名就可以看出其实一个古老的类，它的命名甚至没有遵守Java的命名规范：驼峰命名规范，我们尽量少用Hashtable，即使需要创建线程安全的Map实现类，也无须使用Hashtable实现类，可以通过后面介绍的Collections工具把HashMap变成线程安全的。
 
+### Set与Map
 
+注意：Set和Map的关系十分紧密，Java源码就是先实现了HashMap、TreeMap等集合，然后通过包装一个所有的Value均为null的Map集合来实现Set集合。
 
+### EnumMap
+
+EnumMap中的所有的key都必须是某个枚举类的枚举值，其根据key的自然顺序来维护key-value对的顺序；
+
+下面程序示例了EnumMap的用法。
+
+```java
+enum Season{
+    SPRING,SUMMER,FALL,WINTER
+}
+public class EnumMapTest{
+    public static void main(String[] args){
+        //创建一个EnumMap对象，该EnumMap的所有key必须是Season的枚举值
+        EnumMap enumMap=new EnumMap(Season.class);
+        enumMap.put(Season.SUMMER,"夏日炎炎");
+        enumMap.put(Season.SPRING,"春暖花开");
+        System.out.println(enumMap);
+    }
+}
+```
+
+运行结果如下：
+
+{SPRING=春暖花开,SUMMER=夏日炎炎}
+
+### 各Map实现类的性能分析
+
+HashMap通常比Hashtable要快一点，因为Hashtable需要额外的线程同步控制；
+
+TreeMap比上两个都要慢，因为TreeMap底层采用红黑树来管理key-value对，但使用TreeMap有一个好处，其键值对总是处于有序状态，当TreeMap被填充之后，就可以调用keySet()，取得由key组成的set，然后使用toArray()方法生成key的数组，接下来使用Arrays的binarySearch()方法在已排序的素组中快速地查询对象。
+
+在一般场景，考虑使用HashMap，在需要排序时，使用TreeMap；
+
+EnumMap的性能最好，但它只能使用同一个枚举类的枚举值作为key。
+
+## 异常部分
+
+### 不要忽略捕获到的异常
+
+catch块为空时，所有的人都看不到异常，但整个应用可能已经彻底换了，仅在catch块里打印错误跟踪栈信息稍微好一点，但仅比空白多了几行异常信息，通常建议对异常采取适当措施，比如：
+
+* 处理异常。对异常进行合适的修复，然后绕过异常发生的地方继续执行；或者用别的数据进行计算，以代替期望的方法返回值；或者提示用户重新操作------总之，对于Checked异常，程序应该尽量修复。
+* 重新抛出新异常：把当前运行环境下能做的事情尽量做完，然后进行异常转译，把异常包装成当前层的异常，重新抛出给上层调用者；
+* 在合适的层处理异常。如果当前层不清楚如何处理异常，就不要在当前层使用catch语句来捕获该异常，直接使用throws抛出该异常，让上层调用者来负责处理该异常。
+
+## 线程部分
+
+###  包装线程不安全的集合
+
+可以使用Collections提供的体态方法把这些集合包装成线程安全的集合，如下：
+
+```java
+<T> Collection<T> synchronizedCollection(Collection<T> c):返回指定collection对应的线程安全的collection；
+static <T>List<T> synchronizedList(List<T> list):返回指定List对象对应的线程安全的List对象；
+static <K,V>Map<K,V> synchronizedMap(Map<K,V> m):返回指定Map对象对应的线程安全的Map对象；
+static <T>Set<T> synchronizedSet(Set<T> s):返回指定Set对象对应的线程安全的Set对象；
+同理synchronizedSortedMap\synchronizedSortedSet
+```
+
+例如，我们要在多线程中使用线程安全的HashMap对象，可以采用如下代码：
+
+```java
+HashMap m=Collections.synchronizedMap(new HashMap());
+```
+
+如果需要把某个集合包装成线程安全的集合，应该在创建之后立即包装。
+
+### 线程安全的集合类
+
+从Java5开始，在java.util.concurrent包下提供了大量支持高效并发访问的集合接口和实现类；
+
+大致可以分为两大类：
+
+* 以Concurrent开头的集合类，如ConcurrentHashMap\ConcurrentLinkedQueue等；
+* 以CopyOnWrite开头的集合类，如CopyOnWriteArrayList
+
+其中以Concurrent开头的集合类代表了支持并发访问的集合，它们可以支持多个线程并发写入访问，这些写入线程的所有操作都是线程安全的，但读取操作不必锁定，以Concurrent开头的集合类采用了更复杂的算法来保证永远不会锁住整个集合，因此在并发写入时有较好的性能。
+
+对于CopyOnWrite开头的集合类，正如其名字所暗示的，它采用复制底层数组的方式来实现写操作。
+当线程对集合执行读取操作时，线程将会直接读取集合本身，无需加锁与阻塞；当线程对集合执行写操作时，该集合会在底层复制一份新的数组，对新的数组执行写入操作，因此同时性能也比较。
+
+由此可见，对于CopyOnWrite开头的集合类适用于读取操作远远大于写入操作的场景中，例如缓存等。
+
+## 序列化
+
+如果需要让某个对象支持序列化机制，为了让某个类是可序列化的，该类必须实现如下两个接口之一：
+
+* Serializable
+* Externalizable
+
+所有可能在网络上传输的对象的类必须是可序列化的，否则程序将会出现异常；所有需要保存到磁盘的对象的类都必须可序列化，比如Web应用中需要保存到HttpSession或ServletContext属性的Java对象。
+
+### 对象引用的序列化
+
+若某个类的Field是另一个引用类型的，那么这个引用类必须是可序列化的，否则拥有该类型的Field的类也是不可序列化的。
 
