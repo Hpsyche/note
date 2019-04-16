@@ -88,6 +88,10 @@ Java程序在执行前先要检查类是否已经被加载。
 
   ![](D:\Work\TyporaNotes\note\JVM\pict\类加载过程.png)
 
+  自底向上检查是否已被加载，自顶向下加载类
+
+  注意：根类加载器并不是Java实现的，因此访问扩展加载器的父类加载器时返回null。
+
 * 为什么要使用这种双亲委托机制？
 
    * 可以避免重复加载，当父类已经加载了该类的时候，就没有必要子ClassLoader再加载一次；
@@ -180,4 +184,32 @@ Java程序在执行前先要检查类是否已经被加载。
    ```
 
    结果分析：只输出 “hello world”，这是因为虽然在Java源码中引用了ConstClass类中的常量CONSTANT，但是编译阶段将此常量的值“hello world”存储到了NotInitialization常量池中，对常量ConstClass.CONSTANT的引用实际都被转化为NotInitialization类对自身常量池的引用了。也就是说，实际上NotInitialization的Class文件之中并没有ConstClass类的符号引用入口，这两个类在编译为Class文件之后就不存在关系了。
+
+   ConstantValue属性的作用是通知虚拟机自动为静态变量赋值，只有被static修饰的变量才可以使用这项属性。<font color=red>非static变量的赋值是在实例构造器方法中进行的</font>；<font color=red>static类型变量赋值分两种，在类构造器中赋值，或使用ConstantValue属性赋值。</font>
+
+   在实际的程序中，只有同时被final和static修饰的字段才有ConstantValue属性，且限于基本类型和String。编译时Javac将会为该常量生成ConstantValue属性，在类加载的准备阶段虚拟机便会根据ConstantValue为常量设置相应的值，<font color=red>如果该变量没有被final修饰，或者并非基本类型及字符串，则选择在类构造器中进行初始化</font>
+
+   * 若将以上例子的
+
+     ```java
+     public static  final String CONSTANT = "hello world";
+     ```
+
+     改为
+
+     ```java
+     public static  final String CONSTANT = System.currentTimeMills()+"";
+     ```
+
+     此时由于CONSTANT的值在运行时才可以确定，会导致ConstClass类的初始化。
+
+   * *final、static、final static的区别*
+
+     static修饰的字段在加载过程中准备阶段被初始化，但是这个阶段只会赋值一个默认的值，（0或null而非定义的值），**初始化阶段在类构造器中才会赋值为变量定义的值。**
+
+     final static修饰的字段在javac编译时生成ConstantValue属性，**在<font color=red>类加载的准备阶段</font>直接把ConstantValue的值赋值给该字段**。
+
+     **final修饰的字段在运行时被初始化，可以直接赋值，也可以在实例构造器中赋值，赋值后不可修改。**
+
+     
 
