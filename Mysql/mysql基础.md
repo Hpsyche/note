@@ -14,7 +14,7 @@
 
     * truncate table在功能上与不带 where子句的 delete语句相同：二者均删除表中的全部行。但 truncate table比 delete速度快，且使用的系统和事务日志资源少。 delete语句每次删除一行，并在事务日志中为所删除的每行记录一项。
 
-    * truncate ,delete,drop放在一起比较：
+      truncate ,delete,drop放在一起比较：
       truncate table：删除内容、释放空间但不删除定义。
       delete table:删除内容不删除定义，不释放空间。
       drop table：删除内容和定义，释放空间。
@@ -62,4 +62,12 @@
   因此，离线RowSet正是来处理此问题的，离散RowSet直接将底层数据读入内存中，封装成RowSet对象，并可以完全当做JavaBean来使用，不仅安全，编程也简单。
 
   RowSet的父接口CachedRowSet提供了分页功能，即一次只装载ResultSet的几条记录，避免CachedRowSet占用内存过大的问题，导致性能消耗。
+  
+  ## 对sql视图进行修改时是否会改变基本数据表数据
+  
+  会的。视图只是数据库在磁盘上的一个缩小范围的逻辑影像，任何修改都会修改到基本数据表的。  
+  
+  同理，如果改动了基本表，视图来源于这个基本表，那视图给你呈现的结果也会随之发生变化。
+  
+  为了不通过视图了修改数据，我们在创建视图时，可以通过with check option；来强制不允许修改视图的数据。
 

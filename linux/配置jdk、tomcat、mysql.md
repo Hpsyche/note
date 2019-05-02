@@ -100,3 +100,10 @@ mysql -h 111.111.111.11 -u root -p
 
 
 
+
+
+1.yum –y install java
+
+2.上传tomcat
+
+3.注意 阿里云需要 配置8080端口

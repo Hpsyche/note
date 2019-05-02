@@ -88,7 +88,20 @@
       //Output:true flase
   ```
 
-  其实是，系统把一个128--127之间的整数自动装箱成Integer实例，并放入一个名为cache的数组中缓存起来，如果以后把一个-128--127之间的整数自动装箱成一个Integer实例时，实际上是直接指向相应的数组元素，因此-128--127之间的同一个整数自动装箱成Integer实例时，永远都是引用cache数组的同一个元素，所以它们全部相等，在此范围外则不然；
+  在进行自动拆装箱时，编译器会使用Integer.valueof()来创建Integer实例。
+
+  以下是Integer.valueof()的源代码：
+
+    public static Integer valueOf(int i) {
+          assert IntegerCache.high >= 127;
+          if (i >= IntegerCache.low && i <= IntegerCache.high)
+              return IntegerCache.cache[i + (-IntegerCache.low)];
+          return new Integer(i);
+      }
+
+  简单地解释这段代码，就是如果传入的int在IntegerCache.low和IntegerCache.high之间，那就尝试看前面的缓存中有没有打过包的相同的值，如果有就直接返回，否则就创建一个Integer实例。IntegerCache.low 默认是-128；IntegerCache.high默认是127.
+
+  其实是，系统把一个-128--127之间的整数自动装箱成Integer实例，并放入一个名为cache的数组中缓存起来，如果以后把一个-128--127之间的整数自动装箱成一个Integer实例时，实际上是直接指向相应的数组元素，因此-128--127之间的同一个整数自动装箱成Integer实例时，永远都是引用cache数组的同一个元素，所以它们全部相等，在此范围外则不然；
 
 * final修饰基本类型变量和引用类型变量的区别
 
@@ -310,7 +323,7 @@ HashMap m=Collections.synchronizedMap(new HashMap());
 
 ### 线程安全的集合类
 
-从Java5开始，在java.util.concurrent包下提供了大量支持高效并发访问的集合接口和实现类；
+从Java5开始，**在java.util.concurrent包下提供了大量支持高效并发访问的集合接口和实现类；**
 
 大致可以分为两大类：
 
@@ -331,7 +344,7 @@ HashMap m=Collections.synchronizedMap(new HashMap());
 * Serializable
 * Externalizable
 
-所有可能在网络上传输的对象的类必须是可序列化的，否则程序将会出现异常；所有需要保存到磁盘的对象的类都必须可序列化，比如Web应用中需要保存到HttpSession或ServletContext属性的Java对象。
+**所有可能在网络上传输的对象的类必须是可序列化的，否则程序将会出现异常；所有需要保存到磁盘的对象的类都必须可序列化，比如Web应用中需要保存到HttpSession或ServletContext属性的Java对象。**
 
 ### 对象引用的序列化
 
