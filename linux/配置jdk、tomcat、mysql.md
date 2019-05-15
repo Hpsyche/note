@@ -100,6 +100,49 @@ mysql -h 111.111.111.11 -u root -p
 
 
 
+<https://blog.csdn.net/tjcyjd/article/details/52195883>
+
+如何允许远程连接mysql数据库呢，操作如下：
+
+首先登录账号
+
+
+mysql -uroot -p
+
+使用mysql用户
+
+use mysql
+
+
+如果报此类错：ERROR 1820 (HY000): You must SET PASSWORD before executing this statement，则先执行以下命令
+
+SET PASSWORD = PASSWORD('xxxxxx');
+
+如何开启MySQL的远程帐号，创建远程登陆用户并授权
+
+grant all PRIVILEGES on test_db.* to root@'192.168.1.101'  identified by '123456';
+
+上面的语句表示将 test_db 数据库的所有权限授权给 root 这个用户，允许 root 用户在 192.168.1.101 这个 IP 进行远程登陆，并设置 root 用户的密码为 123456 。
+
+
+下面逐一分析所有的参数：
+
+
+all PRIVILEGES 表示赋予所有的权限给指定用户，这里也可以替换为赋予某一具体的权限，例如select,insert,update,delete,create,drop 等，具体权限间用“,”半角逗号分隔。
+
+
+test_db.* 表示上面的权限是针对于哪个表的，test_db指的是数据库，后面的 * 表示对于所有的表，由此可以推理出：对于全部数据库的全部表授权为“*.*”，对于某一数据库的全部表授权为“数据库名.*”，对于某一数据库的某一表授权为“数据库名.表名”。
+
+
+root 表示你要给哪个用户授权，这个用户可以是存在的用户，也可以是不存在的用户。
+
+
+192.168.1.101   表示允许远程连接的 IP 地址，如果想不限制链接的 IP 则设置为“%”即可。
+
+123456 为用户的密码。
+
+
+
 
 
 1.yum –y install java
