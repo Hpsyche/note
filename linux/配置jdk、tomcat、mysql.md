@@ -107,9 +107,7 @@ mysql -h 111.111.111.11 -u root -p
 首先登录账号
 
 
-mysql -uroot -p
-
-使用mysql用户
+mysql -uroot 
 
 use mysql
 
