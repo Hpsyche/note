@@ -69,17 +69,17 @@ NoSQL的数据主要存储在内存中（部分可以持久化到磁盘），而
 
 用户ID为查找的key，存储的value用户对象包含姓名，年龄，生日等信息，如果用普通的key/value结构来存储，主要有以下2种存储方式：
 
-![](D:\Work\TyporaNotes\note\redis\pict\redis之hash应用1.jpg)
+![](D:\Work\TyporaNotes\note\sql\redis\pict\redis之hash应用1.jpg)
 
 第一种方式将用户ID作为查找key,把其他信息封装成一个对象以序列化的方式存储，这种方式的缺点是，增加了序列化/反序列化的开销，并且在需要修改其中一项信息时，需要把整个对象取回，并且修改操作需要对并发进行保护，引入CAS等复杂问题。
 
-![](D:\Work\TyporaNotes\note\redis\pict\redis之hash应用2.jpg)
+![](D:\Work\TyporaNotes\note\sql\redis\pict\redis之hash应用2.jpg)
 
 第二种方法是这个用户信息对象有多少成员就存成多少个key-value对儿，用用户ID+对应属性的名称作为唯一标识来取得对应属性的值，虽然省去了序列化开销和并发问题，但是用户ID为重复存储，如果存在大量这样的数据，内存浪费还是非常可观的。
 
 那么Redis提供的Hash很好的解决了这个问题，Redis的Hash实际是内部存储的Value为一个HashMap，并提供了直接存取这个Map成员的接口，如下图：
 
-![](D:\Work\TyporaNotes\note\redis\pict\redis之hash应用3.jpg)
+![](D:\Work\TyporaNotes\note\sql\redis\pict\redis之hash应用3.jpg)
 
 **实现方式：**
 
@@ -181,7 +181,7 @@ List list=ope.exec(); //执行事务
 ## 探索Redis事务回滚
 
 * 当redis事务遇到命令格式正确而数据类型不符合的情况，当exec命令执行后，出现问题的出现会显示错误，但是其之前和之后的命令都会被正确执行。
-* 当redis事务遇到命令格式错误的，在命令入列的时候，redis就会检测到错误，其之前和之后的命令都会被事务回滚，即什么都不会发生。
+* 当redis事务遇到命令格式错误的，在命令入列前，redis就会检测到错误，即什么都不会发生。
 
 ## 使用watch命令监控事务
 
