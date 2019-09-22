@@ -370,7 +370,7 @@ System.out.println(s3 == s4);
 
 　　　　因此s3指向堆中的引用，s4指向字符串常量池中的引用，返回 false。
 
-![img](https://img2018.cnblogs.com/blog/1399084/201903/1399084-20190316140611047-2128507065.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-1.png)
 
 ​        jdk1.7中输出结果为 false true
 
@@ -390,9 +390,7 @@ System.out.println(s3 == s4);
 
 ​	由于**s**是new出来的，所以会在常量池和堆中创建两个不同的对象，s.intern()后，发现“1”并不是第一次出现在常量池了，所以接下来就和之前没有区别了。
 
-![img](https://img2018.cnblogs.com/blog/1399084/201903/1399084-20190316140635659-1582684768.png)
-
-
+![](D:\Work\TyporaNotes\note\JVM\pict\2-2.png)
 
 注意：字符串常量池中的 String 对象，也是可以被 GC 回收的，只要它不再被引用了。
 
@@ -442,11 +440,11 @@ A：false，因为s2+s3实际上是使用StringBuilder.append来完成，会生�
 
    代码：
 
-  ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016104137075-1705448066.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-6.png)
 
   内存图：
 
- ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016104255401-1564966969.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-7.png)
 
   分析：对于常量赋值来说, 变量s1始终指向了字符串常量池的字符串(只有一份)
 
@@ -454,15 +452,15 @@ A：false，因为s2+s3实际上是使用StringBuilder.append来完成，会生�
 
    代码：
 
-![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016105030102-237463162.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-3.png)
 
  源代码：
 
- ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016105053793-2009753484.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-4.png)
 
 内存图：
 
- ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016105141328-476697633.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-5.png)
 
 分析：
 
@@ -474,11 +472,11 @@ A：false，因为s2+s3实际上是使用StringBuilder.append来完成，会生�
 
    代码：
 
- ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016110614684-1776973379.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-8.png)
 
   内存图：
 
-   ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016110639527-1308549084.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-9.png)
 
  分析：
 
@@ -490,11 +488,11 @@ A：false，因为s2+s3实际上是使用StringBuilder.append来完成，会生�
 
    代码：
 
- ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016111049014-1447562486.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-10.png)
 
   内存图：
 
-  ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016111118912-84543531.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-11.png)
 
   分析：
 
@@ -516,11 +514,11 @@ A：false，因为s2+s3实际上是使用StringBuilder.append来完成，会生�
 
    代码：
 
-  ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016131643236-1181141543.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-12.png)
 
    内存图：
 
-![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016131741054-2130865687.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-13.png)
 
 分析：
 
@@ -530,11 +528,11 @@ A：false，因为s2+s3实际上是使用StringBuilder.append来完成，会生�
 
    代码：
 
-​    ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016133317601-1464751157.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-14.png)
 
 ​    内存图：
 
-​     ![img](https://img2018.cnblogs.com/blog/1495343/201810/1495343-20181016133400392-1339806703.png)
+![](D:\Work\TyporaNotes\note\JVM\pict\2-15.png)
 
 ​     分析：由于常量池不存在ba, 所以返回堆区ba的地址并添加到常量池中, s2指向了常量池的inte指针
 

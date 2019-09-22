@@ -1,6 +1,6 @@
 CountDownLatch被用来同步一个或多个任务，强制它们等待由其他任务执行的一组操作完成。
 
-可以向COuntDownLatch丢下设置一个初始计数值，任何在这个对象上调用wait()的方法都将阻塞，直至这个计数器值到达0。其他任务在结束其工作时，可以在该对象上调用countDown()来减小这个计数值。CountDownLatch被设计为只能触发一次，计数值不能重置。若想要重置，需要使用CyclicBarrier。
+可以向CountDownLatch丢下设置一个初始计数值，任何在这个对象上调用wait()的方法都将阻塞，直至这个计数器值到达0。其他任务在结束其工作时，可以在该对象上调用countDown()来减小这个计数值。CountDownLatch被设计为只能触发一次，计数值不能重置。若想要重置，需要使用CyclicBarrier。
 
 注意：调用countDown()方法时这个调用被没有被阻塞，只有对await()的调用会被阻塞，直至计数值达到0。
 

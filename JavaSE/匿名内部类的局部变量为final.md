@@ -18,14 +18,34 @@ public class Hello {
 为什么java语法要求我们需要用final修饰呢？想了想没有什么答案，那我们就通过jd-gui反编译工具一探究竟，我们对匿名内部类的字节码文件进行反编译得到以下内容。
 
 ```java
+package hpsyche.string;
+
+import java.io.PrintStream;
+
+final class Hello$1
+  extends Thread
+{
+  Hello$1(String paramString) {}
+  
+  public void run()
+  {
+    System.out.println(this.val$str);
+  }
+}
+
+```
+
+我们可以看到匿名内部类的构造器中传入了一个参数，我们可以推理出这个参数就是底层传入的str的值，但因为反编译工具的某种疏忽将构造器的方法体写成了空，事实上真正的反编译代码应该是下面：
+
+```java
 public class Hello$1 extends Thread {
-	private String val$str;
-	Hello$1(String paramString) {
-		this.val$str = paramString;
-	}
-	public void run() {
-		System.out.println(this.val$str);
-	}
+    private String val$str;
+    Hello$1(String paramString) {
+        this.val$str = paramString;
+    }
+    public void run() {
+        System.out.println(this.val$str);
+    
 }
 ```
 
