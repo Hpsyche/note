@@ -21,3 +21,4 @@ Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数�
 4）value大小
 
 redis最大可以达到1GB，而memcache只有1MB
+

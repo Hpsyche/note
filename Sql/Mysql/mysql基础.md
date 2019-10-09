@@ -69,5 +69,11 @@
   
   同理，如果改动了基本表，视图来源于这个基本表，那视图给你呈现的结果也会随之发生变化。
   
-  为了不通过视图了修改数据，我们在创建视图时，可以通过with check option；来强制不允许修改视图的数据。
+  为了不通过视图了修改数据，我们在创建视图时，可以通过**with check option**；来强制不允许修改视图的数据。
+  
+  创建视图语句：
+  
+  > create view sid_view as select * from student with check option;
+  
+  
 
